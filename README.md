@@ -28,9 +28,9 @@ launch files for visualization and simulation etc. to make it work with ROS 2 (T
 Here are the list of features of the project
 
 ### Features
-- **Seamless Conversion**: Easily convert Autodesk Fusion 360 models into URDF files compatible with ROS 2.
-- **Visualization**: Visualize your robot models in Rviz, a 3D visualization tool for ROS.
-- **Simulation**: Launch and test your robot simulations in Gazebo Sim, a robust robot simulation environment.
+- **Seamless Conversion to URDF**: Easily convert Autodesk Fusion 360 models into URDF files compatible with ROS 2.
+- **Visualization**: Visualize your robot models in Rviz using the launch file automatically created after conversion.
+- **Simulation**: Launch and test your robot simulations in ROS 2 Humble with Gazebo Classic and ROS 2 Jazzy with latest Gazebo Sim.
 - **User-Friendly Workflow**: Provides a straightforward workflow from CAD design to robotic simulation.
 - **Sample Models**: Includes instructions and examples for modeling sample robots.
 - **Customization**: Supports customization of URDF files to match specific robot configurations and requirements.
@@ -42,17 +42,16 @@ By leveraging this tool, users can bridge the gap between CAD modeling and robot
 
 Here is the platform we used to test this plugin.
 
-* Windows 11 x64
-* Autodesk Fusion 360 2.0.20981 x86_64
-
+- **Operating System**: Windows 11 x64
+- **Software**: Autodesk Fusion 360 2.0.20981 x86_64
 
 ## Installation
 
 Here are the steps to install the script in Fusion 360
 
-* Step 1: Download repository as Zip file and extract the file to a location.
+* **Step 1**: Download repository as Zip file and extract the file to a location.
 
-* Step 2: Open Fusion 360, and press *Shift+S*, this will show the Scripts and Add-Ins like shown below
+* **Step 2**: Open Fusion 360, and press *Shift+S*, this will show the Scripts and Add-Ins like shown below
 
 <p align="center">
   <img src="img/scripts_ui.png" alt="Scripts and Add-Ins UI">
@@ -67,7 +66,7 @@ The folder we have to browse is *Fusion_URDF_Exporter_ROS2*.
 
 After selecting the folder, it will show the new script as *Fusion_URDF_Exporter_ROS2* under *My Scripts*.
 
-* Step 3: Press Shift+S to see the *Scripts and Add-Ins Window* (Utilities -> ADD-INS)
+* **Step 3**: Press Shift+S to see the *Scripts and Add-Ins Window* (Utilities -> ADD-INS)
 
 <p align="center">
   <img src="img/fusion360_script.png" alt="Fusion 360 Script Location">
@@ -92,13 +91,21 @@ Instructions on how to launch the robot simulation in Gazebo Sim.
 List any limitations or known issues with the project.
 
 ## Contributing
-Guidelines for contributing to the project.
+
+Always welcome bug fixes, new features etc.
+
+* **Create a Pull Request**: Ceate a pull request from your forked repository. Provide a clear description of the changes and any relevant information. 
+
 
 ## License
-Information about the project's license.
+
+This project is licensed under the terms of the [MIT License](LICENSE).
+
 
 ## Credits
-Credits for the project
+This project is an updation of repositories from [syuntoku14](https://github.com/syuntoku14/fusion2urdf) and [dheena2k2](https://github.com/dheena2k2/fusion2urdf-ros2). 
+
 
 ## Conclusion
-Summarize the project and provide any final thoughts or recommendations.
+
+In conclusion, the "Autodesk Fusion 360 to URDF for ROS 2" project provides a powerful and user-friendly tool for roboticists and engineers. By streamlining the process of converting CAD models to URDF files, this tool enhances the efficiency of robot design, visualization, and simulation within the ROS 2 ecosystem. We hope this project will significantly contribute to your robotic development efforts and look forward to your feedback and contributions.
