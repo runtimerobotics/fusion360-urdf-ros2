@@ -1,0 +1,10 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"script",
+	"author":	"Lentin Joseph",
+	"description":	{
+		"":	"Export Fusion360 model to URDF file for ROS 2"
+	},
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
