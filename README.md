@@ -4,12 +4,12 @@
 - [Introduction](#introduction)
 - [Description](#description)
 - [Installation](#installation)
+- [Important Design Practices](#important-design-practices)
 - [Usage](#usage)
   - [Start Modeling a Sample Robot](#start-modeling-a-sample-robot)
   - [Converting Fusion 360 Model to URDF for ROS 2](#converting-fusion-360-model-to-urdf-for-ros-2)
   - [Visualizing Robot in Rviz](#visualizing-robot-in-rviz)
   - [Launching Robot Simulation in Gazebo Sim](#launching-robot-simulation-in-gazebo-sim)
-- [Limitations](#limitations)
 - [Contributing](#contributing)
 - [License](#license)
 - [Credits](#credits)
@@ -74,6 +74,50 @@ After selecting the folder, it will show the new script as *Fusion_URDF_Exporter
 
 The installation is successfull if you are seeing the script under *My Scripts*.
 
+After installing the script, let's dive into some important design practices we have to do to make the script work.
+
+## Important Design Practices 
+
+Here’s a list of things you have to consider before start modelling the robot to make it work with the script:
+
+- **Define all robot links as Components Definitions**:
+  - Ensure all "links" are defined as components in your model.
+  - Models like the SpotMini robot need a properly defined `base_link`.
+
+- **Joint Definition**:
+  - Parent links must be set as **Component2** when defining joints, not as Component1.
+  - Errors like `KeyError: base_link__1` occur if `base_link` is incorrectly assigned.
+
+- **Component Requirements**:
+  - Components should contain **only bodies**—nested components are not supported.
+  - Avoid components that have other components inside them.
+
+- **URDF Export Issues**:
+  - Abnormal URDF exports without error messages usually indicate joint problems—redefine the joints and try again.
+  - Supported joint types: **Rigid**, **Slider**, and **Revolute**.
+
+- **Complex Kinematic Loops and Spherical Joints**:
+  - Avoid using Fusion 360’s inbuilt joint editor for positioning joints in complex kinematic loops.
+  - For spherical joints:
+    - Export as revolute joints and later modify them to spherical joints in the URDF.
+    - This works only if the target parser/engine supports spherical joints (e.g., PyBullet).
+
+- **Joint Alignment**:
+  - Misalignments can occur during initial joint positioning in Fusion.
+  - Manual adjustments can cause cascading issues with visual and collision properties.
+
+- **Export Tips**:
+  - Turn off "Capture design history" before exporting.
+  - Use distinct names for components and save individual components in separate folders to prevent issues.
+
+- **Specific Issues**:
+  - Copy-paste actions can lead to problems; prefer "copy-paste new" for components.
+  - Preplan component placement to avoid assembly issues.
+
+These points cover the critical limitations and considerations when using the script for exporting URDF files from Fusion 360 models.
+
+
+
 ## Usage
 ### Start Modeling a Sample Robot
 Instructions on how to start modeling a sample robot using Autodesk Fusion 360.
@@ -87,8 +131,7 @@ Guide on how to visualize the robot in Rviz.
 ### Launching Robot Simulation in Gazebo Sim
 Instructions on how to launch the robot simulation in Gazebo Sim.
 
-## Limitations
-List any limitations or known issues with the project.
+
 
 ## Contributing
 
