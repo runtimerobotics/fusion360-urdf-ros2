@@ -42,16 +42,18 @@ By leveraging this tool, users can bridge the gap between CAD modeling and robot
 
 Here is the platform we used to test this plugin.
 
-- **Operating System**: Windows 11 x64
+- **Operating System**: Windows 11 x64, macOS
 - **Software**: Autodesk Fusion 360 2.0.20981 x86_64
 
 ## Installation
 
 Here are the steps to install the script in Fusion 360
 
-* **Step 1**: Download repository as Zip file and extract the file to a location.
+* **Step 1**: Download and [install Autodesk Fusion 360 in your computer](https://www.autodesk.com/in/education/edu-software/fusion)
 
-* **Step 2**: Open Fusion 360, and press *Shift+S*, this will show the Scripts and Add-Ins like shown below
+* **Step 2**: Download repository as Zip file and extract the file to a location.
+
+* **Step 3**: Open Fusion 360, and press *Shift+S*, this will show the Scripts and Add-Ins like shown below
 
 <p align="center">
   <img src="img/scripts_ui.png" alt="Scripts and Add-Ins UI">
@@ -66,7 +68,7 @@ The folder we have to browse is *Fusion_URDF_Exporter_ROS2*.
 
 After selecting the folder, it will show the new script as *Fusion_URDF_Exporter_ROS2* under *My Scripts*.
 
-* **Step 3**: Press Shift+S to see the *Scripts and Add-Ins Window* (Utilities -> ADD-INS)
+* **Step 4**: Press Shift+S to see the *Scripts and Add-Ins Window* (Utilities -> ADD-INS)
 
 <p align="center">
   <img src="img/fusion360_script.png" alt="Fusion 360 Script Location">
@@ -81,7 +83,7 @@ After installing the script, let's dive into some important design practices we 
 Here’s a list of things you have to consider before start modelling the robot to make it work with the script:
 
 - **Define all robot links as Components Definitions**:
-  - Ensure all "links" are defined as components in your model.
+  - Ensure all robot "links" are defined as components in your model.
   - Models like the SpotMini robot need a properly defined `base_link`.
 
 - **Joint Definition**:
@@ -123,7 +125,31 @@ These points cover the critical limitations and considerations when using the sc
 Instructions on how to start modeling a sample robot using Autodesk Fusion 360.
 
 ### Converting Fusion 360 Model to URDF for ROS 2
-Steps to convert a Fusion 360 model to URDF for ROS 2.
+After completing the CAD model in Fusion 360, Press Shift+S for opening the script box and select the *Fusion_URDF_Exporter_ROS2* script from My Scritpts. 
+
+It will show a welcome screen showing the basic information about the script and ask the user to proceed with conversion or not.
+
+<p align="center">
+  <img src="img/intro_screen.png" alt="Intro Screen">
+</p>
+
+After pressing the *Ok* button, it will ask for the folder in which the ROS 2 package has to be created.
+
+<p align="center">
+  <img src="img/browse_window.png" alt="Browse Window">
+</p>
+
+When we press the *Ok* button it will show the browse dialog and we can select a folder. After selecting the folder 
+select which Gazebo version we have to go for. Gazebo Harmonic or Classic. Based on the input, it will create the launch file for that. 
+<p align="center">
+  <img src="img/gazebo_selection.png" alt="Gazebo Selection">
+</p>
+
+Once you select the version, it will show the final message whether it is successful or not.
+
+<p align="center">
+  <img src="img/success.png" alt="Success Message">
+</p>
 
 ### Visualizing Robot in Rviz
 Guide on how to visualize the robot in Rviz.

@@ -1,4 +1,4 @@
-#Author-syuntoku14
+#Author-syuntoku14, Dheena2k2, Lentin Joseph,
 #Description-Generate URDF file from Fusion 360
 
 import adsk, adsk.core, adsk.fusion, traceback
@@ -28,6 +28,7 @@ def run(context):
         # initialize
         app = adsk.core.Application.get()
         ui = app.userInterface
+
         product = app.activeProduct
         design = adsk.fusion.Design.cast(product)
         title = 'Fusion 360 -> ROS 2 URDF'
@@ -38,6 +39,8 @@ def run(context):
         root = design.rootComponent  # root component
         components = design.allComponents
 
+
+
         # set the names
         robot_name = root.name.split()[0]
         package_name = robot_name + '_description'
@@ -45,9 +48,9 @@ def run(context):
         # Show welcome message
         welcome_msg = ("Welcome to the Fusion 'Fusion 360 -> ROS 2 URDF Script' plugin.\n"
                        "\n"
-                       "This tool generates a robot_description package with launch files for visualizing your robot in Rviz and spawning the model in Gazebo Sim.\n"
+                       "This tool generates a robot_description package with launch files for visualizing your robot in Rviz and spawning the model in Gazebo.\n"
                        "\n"
-                       "It has been tested with ROS 2 Jazzy and Gazebo Harmonic, as well as ROS 2 Humble with both Gazebo Classic and Gazebo Sim.\n\n"
+                       "It has been tested with ROS 2 Jazzy and Gazebo Harmonic, as well as ROS 2 Humble with Gazebo Classic.\n\n"
                        "\n"
                        "Press OK to continue or Cancel to quit.")
         if ui.messageBox(welcome_msg, title, adsk.core.MessageBoxButtonTypes.OKCancelButtonType) != adsk.core.DialogResults.DialogOK:
