@@ -213,6 +213,13 @@ plugins of Gazebo.
   <img src="img/gazebo_visualization.png" alt="Gazebo Visualization">
 </p>
 
+**Note: If you are using Gazebo Sim you can visualize the center of mass, collision and inertia by finding the robot name in the **Entity Tree** and right click on it. You can find an option called **View** and can able to view all these parameters.**
+
+Here is the screenshot of these parameter of ros2bot from the demos.
+
+<p align="center">
+  <img src="img/gazebo_param.png" alt="Gazebo Parameters">
+</p>
 
 ## Contributing
 
@@ -229,7 +236,7 @@ This project is licensed under the terms of the [MIT License](LICENSE).
 ## Credits
 * This project is an updation of repositories from <a href="https://github.com/syuntoku14/fusion2urdf" target="_blank">syuntoku14</a> and <a href="https://github.com/dheena2k2/fusion2urdf-ros2" target="_blank">dheena2k2</a>
 
-* Updated using <a href="https://github.com/features/copilot" target="_blank">Github Copilot</a> and <a href="https://chatgpt.com/" target="_blank">ChatGPT</a>
+* Code and Document updatation using <a href="https://github.com/features/copilot" target="_blank">Github Copilot</a> and <a href="https://chatgpt.com/" target="_blank">ChatGPT</a>
 
 ## Conclusion
 
