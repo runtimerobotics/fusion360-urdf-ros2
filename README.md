@@ -99,6 +99,12 @@ We need to follow this coordinate system to visualize and spawn the model correc
   <img src="img/right_handle_coordinate.png" alt="Right Handle Coordinate" width="50%">
 </p>
 
+In Fusion 360, the robot model and coordinate system looks like this
+
+<p align="center">
+  <img src="img/coordinate_sys.png" alt="Coordinate System" width="100%">
+</p>
+
 - **Define all robot links as Components Definitions**:
   - Ensure all robot "links" are defined as components in your model.
   - The root link has to be defined in the name of `base_link`.
