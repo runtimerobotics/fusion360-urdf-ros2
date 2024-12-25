@@ -151,12 +151,46 @@ Once you select the version, it will show the final message whether it is succes
   <img src="img/success.png" alt="Success Message">
 </p>
 
+After creating the ROS 2 package for your robot, you can copy the ROS 2 package to your ROS 2 workspace.
+If you are working in Windows 11, you can work on ROS 2 using WSL or using a virtual machine. Othervice you can reboot and 
+select Ubuntu 22.04 for ROS 2 Humble/Ubuntu 24.04 for ROS 2 Jazzy.
+
+For example, if you use ros2bot model from demos folder and convert to ROS 2 package, you will get a package named
+*ros2bot_description*. The package is also put in the demos folder for your reference. Copy to your ROS 2 workspace
+
+For eg. Let's ros2_ws is the name of the workspace and you copied the package to the *src* folder of the workspace.
+
+```
+cd ~/ros2_ws
+colcon build
+```
+After building the package, do sourcing of the workspace
+
+```
+source install/setup.bash
+```
+After doing the sourcing of the workspace, we can do the visualization and simulation of the robot.
 ### Visualizing Robot in Rviz
-Guide on how to visualize the robot in Rviz.
+Here is the command to visualize the robot in Rviz
+
+```
+ros2 launch ros2bot_description display.launch.py
+```
+This will be showing Rviz along with *joint_state_publisher_gui* node.
+
+<p align="center">
+  <img src="img/rviz_visualization.png" alt="Rviz Visualization">
+</p>
 
 ### Launching Robot Simulation in Gazebo Sim
-Instructions on how to launch the robot simulation in Gazebo Sim.
+Here is the command to spawn the robot in Gazebo. The same command can be use for Gazebo Classic and Gazebo Sim.
 
+**Note**: The URDF doesn't have any Gazebo plugin or ROS 2 controllers configurations. We have to edit the package to include all the 
+plugins of Gazebo.
+
+<p align="center">
+  <img src="img/gazebo_visualization.png" alt="Gazebo Visualization">
+</p>
 
 
 ## Contributing
