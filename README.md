@@ -125,37 +125,32 @@ These points cover the critical limitations and considerations when using the sc
 Instructions on how to start modeling a sample robot using Autodesk Fusion 360.
 
 ### Converting Fusion 360 Model to URDF for ROS 2
-After completing the CAD model in Fusion 360, Press Shift+S for opening the script box and select the *Fusion_URDF_Exporter_ROS2* script from My Scritpts. 
-
-It will show a welcome screen showing the basic information about the script and ask the user to proceed with conversion or not.
+After completing the CAD model in Fusion 360, Press Shift+S for opening the script box and select the *Fusion_URDF_Exporter_ROS2* script from My Scripts. 
 
 <p align="center">
-  <img src="img/intro_screen.png" alt="Intro Screen">
+  <img src="img/fusion_360_steps.png" alt="Intro Screen">
 </p>
 
-After pressing the *Ok* button, it will ask for the folder in which the ROS 2 package has to be created.
 
-<p align="center">
-  <img src="img/browse_window.png" alt="Browse Window">
-</p>
+* **Step 1**: It will show a welcome screen showing the basic information about the script and ask the user to proceed with conversion or not.
 
-When we press the *Ok* button it will show the browse dialog and we can select a folder. After selecting the folder 
-select which Gazebo version we have to go for. Gazebo Harmonic or Classic. Based on the input, it will create the launch file for that. 
-<p align="center">
-  <img src="img/gazebo_selection.png" alt="Gazebo Selection">
-</p>
+* **Step 2**: After pressing the *Ok* button, it will ask for the folder in which the ROS 2 package has to be created.
+ 
 
-Once you select the version, it will show the final message whether it is successful or not.
+* **Step 3**: When we press the *Ok* button it will show the browse dialog and we can select a folder.  
 
-<p align="center">
-  <img src="img/success.png" alt="Success Message">
-</p>
+* **Step 4**: After selecting the folder select which Gazebo version we have to go for. Here are the two option that is current available (Gazebo Harmonic or Classic). Based on the input, it will create the launch file for that. 
+
+* **Step 5**: Once you select the Gazebo version, it will show the final message whether it is successful or not. 
+It will create the ROS 2 description package after this conversion.
+
+### Building ROS 2 Package
 
 After creating the ROS 2 package for your robot, you can copy the ROS 2 package to your ROS 2 workspace.
 If you are working in Windows 11, you can work on ROS 2 using WSL or using a virtual machine. Othervice you can reboot and 
 select Ubuntu 22.04 for ROS 2 Humble/Ubuntu 24.04 for ROS 2 Jazzy.
 
-For example, if you use ros2bot model from demos folder and convert to ROS 2 package, you will get a package named
+For example, if you use *ros2bot* model from demos folder and convert to ROS 2 package, you will get a package named
 *ros2bot_description*. The package is also put in the demos folder for your reference. Copy to your ROS 2 workspace
 
 For eg. Let's ros2_ws is the name of the workspace and you copied the package to the *src* folder of the workspace.
