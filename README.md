@@ -185,6 +185,9 @@ This will be showing Rviz along with *joint_state_publisher_gui* node.
 ### Launching Robot Simulation in Gazebo Sim
 Here is the command to spawn the robot in Gazebo. The same command can be use for Gazebo Classic and Gazebo Sim.
 
+```
+ros2 launch ros2bot_description gazebo.launch.py
+```
 **Note**: The URDF doesn't have any Gazebo plugin or ROS 2 controllers configurations. We have to edit the package to include all the 
 plugins of Gazebo.
 
