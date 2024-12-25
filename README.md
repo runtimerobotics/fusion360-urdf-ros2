@@ -82,13 +82,30 @@ After installing the script, let's dive into some important design practices we 
 
 Here’s a list of things you have to consider before start modelling the robot to make it work with the script:
 
+* **Correct the Fusion 360 coordinate system**: We have to keep the right-hand-rule for the cartesian coordinate system for designing robot model to properly work with the robot model in ROS 2 URDF. 
+
+This section describes the coordinate system used in the project.
+
+
+1) **Index Finger (X-axis)**: Represents the positive direction of the X-axis; the robot model should always point to the +X direction in Fusion 360. This axis has the **length** of the robot.
+
+2) **Thumb (Z-axis)**: Represents the positive direction of the Z-axis. This axis has the **height** of the robot.
+
+3) **Middle Finger (Y-axis)**: Represents the positive direction of the Y-axis. This axis is the robot's **width**.
+
+We need to follow this coordinate system to visualize and spawn the model correctly in Rviz and Gazebo in ROS 2.
+
+<p align="center">
+  <img src="img/right_handle_coordinate.png" alt="Right Handle Coordinate" width="50%">
+</p>
+
 - **Define all robot links as Components Definitions**:
   - Ensure all robot "links" are defined as components in your model.
-  - Models like the SpotMini robot need a properly defined `base_link`.
+  - The root link has to be defined in the name of `base_link`.
+  - Errors like `KeyError: base_link__1` occur if `base_link` is incorrectly assigned.
 
 - **Joint Definition**:
-  - Parent links must be set as **Component2** when defining joints, not as Component1.
-  - Errors like `KeyError: base_link__1` occur if `base_link` is incorrectly assigned.
+  - Parent links must be set as **Component2** when defining joints, not as **Component1**.
 
 - **Component Requirements**:
   - Components should contain **only bodies**—nested components are not supported.
