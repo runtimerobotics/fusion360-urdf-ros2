@@ -139,6 +139,28 @@ def write_urdf(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_n
     write_joint_urdf(joints_dict, repo, links_xyz_dict, file_name)
     write_gazebo_endtag(file_name)
 
+def write_urdf_sim(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir):
+    try: os.mkdir(save_dir + '/urdf')
+    except: pass
+
+    file_name = save_dir + '/urdf/' + robot_name + '.xacro'  # the name of urdf file
+    repo = package_name + '/meshes/'  # the repository of binary stl files
+    with open(file_name, mode='w') as f:
+        f.write('<?xml version="1.0" ?>\n')
+        f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro">\n'.format(robot_name))
+        f.write('\n')
+        f.write('<xacro:include filename="$(find {})/urdf/materials.xacro" />'.format(package_name))
+        f.write('\n')
+        f.write('<xacro:include filename="$(find {})/urdf/{}.ros2control" />'.format(package_name, robot_name))
+        f.write('\n')
+        f.write('<xacro:include filename="$(find {})/urdf/{}.gazebo" />'.format(package_name, robot_name))
+        f.write('\n')
+
+    write_link_urdf(joints_dict, repo, links_xyz_dict, file_name, inertial_dict)
+    write_joint_urdf(joints_dict, repo, links_xyz_dict, file_name)
+    write_gazebo_endtag(file_name)
+
+
 def write_materials_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir):
     try: os.mkdir(save_dir + '/urdf')
     except: pass
@@ -204,6 +226,61 @@ to swap component1<=>component2"
                 f.write('\n')
 
         f.write('</robot>\n')
+
+
+def write_ros2control_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir):
+    """
+    Write joints and ros2 control information into urdf "repo/file_name"
+
+
+    Parameters
+    ----------
+    joints_dict: dict
+        information of the each joint
+    repo: str
+        the name of the repository to save the xml file
+    links_xyz_dict: dict
+        xyz information of the each link
+    file_name: str
+        urdf full path
+    """
+
+    file_name = save_dir + '/urdf/{}.ros2control'.format(robot_name)  # the name of urdf file
+    with open(file_name, mode='w') as f:
+        f.write('<?xml version="1.0" ?>\n')
+        f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro" >\n'.format(robot_name))
+        f.write('\n')
+
+        '''
+        for j in joints_dict:
+            parent = joints_dict[j]['parent']
+            child = joints_dict[j]['child']
+            joint_type = joints_dict[j]['type']
+            upper_limit = joints_dict[j]['upper_limit']
+            lower_limit = joints_dict[j]['lower_limit']
+            try:
+                xyz = [round(p-c, 6) for p, c in \
+                    zip(links_xyz_dict[parent], links_xyz_dict[child])]  # xyz = parent - child
+            except KeyError as ke:
+                app = adsk.core.Application.get()
+                ui = app.userInterface
+                ui.messageBox("There seems to be an error with the connection between\n\n%s\nand\n%s\n\nCheck \
+whether the connections\nparent=component2=%s\nchild=component1=%s\nare correct or if you need \
+to swap component1<=>component2"
+                % (parent, child, parent, child), "Error!")
+                quit()
+
+            joint = Joint.Joint(name=j, joint_type = joint_type, xyz=xyz, \
+            axis=joints_dict[j]['axis'], parent=parent, child=child, \
+            upper_limit=upper_limit, lower_limit=lower_limit)
+            if joint_type != 'fixed':
+                joint.make_transmission_xml()
+                f.write(joint.tran_xml)
+                f.write('\n')
+        '''
+        f.write('</robot>\n')
+
+
 
 def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir):
     try: os.mkdir(save_dir + '/urdf')

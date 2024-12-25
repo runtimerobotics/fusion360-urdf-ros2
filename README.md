@@ -117,7 +117,7 @@ In Fusion 360, the robot model and coordinate system looks like this
   - Components should contain **only bodies**—nested components are not supported.
   - Avoid components that have other components inside them.
 
-Here is the components in the ros2bot from the demos
+Here are the components and their bodies in the ros2bot from the demos
 
 <p align="center">
   <img src="img/components.png" alt="ROS2Bot Components">
