@@ -49,7 +49,7 @@ Here is the platform we used to test this plugin.
 
 Here are the steps to install the script in Fusion 360
 
-* **Step 1**: Download and [install Autodesk Fusion 360 in your computer](https://www.autodesk.com/in/education/edu-software/fusion)
+* **Step 1**: Download and <a href="https://www.autodesk.com/in/education/edu-software/fusion" target="_blank">install Autodesk Fusion 360 in your computer</a>
 
 * **Step 2**: Download repository as Zip file and extract the file to a location.
 
@@ -227,8 +227,9 @@ This project is licensed under the terms of the [MIT License](LICENSE).
 
 
 ## Credits
-This project is an updation of repositories from [syuntoku14](https://github.com/syuntoku14/fusion2urdf) and [dheena2k2](https://github.com/dheena2k2/fusion2urdf-ros2). 
+* This project is an updation of repositories from <a href="https://github.com/syuntoku14/fusion2urdf" target="_blank">syuntoku14</a> and <a href="https://github.com/dheena2k2/fusion2urdf-ros2" target="_blank">dheena2k2</a>
 
+* Updated using <a href="https://github.com/features/copilot" target="_blank">Github Copilot</a> and <a href="https://chatgpt.com/" target="_blank">ChatGPT</a>
 
 ## Conclusion
 
