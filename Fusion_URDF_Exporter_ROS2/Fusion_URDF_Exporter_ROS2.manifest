@@ -6,5 +6,5 @@
 		"":	"Export Fusion360 model to URDF file for ROS 2"
 	},
 	"supportedOS":	"windows|mac",
-	"editEnabled":	'true'
+	"editEnabled":	true
 }
