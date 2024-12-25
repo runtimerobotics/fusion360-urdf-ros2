@@ -117,6 +117,13 @@ In Fusion 360, the robot model and coordinate system looks like this
   - Components should contain **only bodies**—nested components are not supported.
   - Avoid components that have other components inside them.
 
+Here is the components in the ros2bot from the demos
+
+<p align="center">
+  <img src="img/components.png" alt="ROS2Bot Components">
+</p>
+
+
 - **URDF Export Issues**:
   - Abnormal URDF exports without error messages usually indicate joint problems—redefine the joints and try again.
   - Supported joint types: **Rigid**, **Slider**, and **Revolute**.
@@ -140,7 +147,6 @@ In Fusion 360, the robot model and coordinate system looks like this
   - Preplan component placement to avoid assembly issues.
 
 These points cover the critical limitations and considerations when using the script for exporting URDF files from Fusion 360 models.
-
 
 
 ## Usage
