@@ -152,7 +152,11 @@ These points cover the critical limitations and considerations when using the sc
 
 ## Usage
 ### Start Modeling a Sample Robot
-Instructions on how to start modeling a sample robot using Autodesk Fusion 360.
+Here are the [instructions on how to start modeling a sample robot using Autodesk Fusion 360](modeling.md).
+
+<p align="center">
+  <img src="img/fusionmodeling.png" alt="Fusion Model">
+</p>
 
 ### Converting Fusion 360 Model to URDF for ROS 2
 After completing the CAD model in Fusion 360, Press Shift+S for opening the script box and select the *Fusion_URDF_Exporter_ROS2* script from My Scripts. 
