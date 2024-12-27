@@ -11,6 +11,7 @@
   - [Visualizing Robot in Rviz](#visualizing-robot-in-rviz)
   - [Launching Robot Simulation in Gazebo Sim](#launching-robot-simulation-in-gazebo-sim)
 - [Contributing](#contributing)
+- [Known Issues and Limitations](#known-issues-and-limitations)
 - [License](#license)
 - [Credits](#credits)
 - [Conclusion](#conclusion)
@@ -233,6 +234,15 @@ Always welcome bug fixes, new features etc.
 
 * **Create a Pull Request**: Ceate a pull request from your forked repository. Provide a clear description of the changes and any relevant information. 
 
+## Known Issues and limitations
+Here is the list of known Issues in this project
+
+1) **Creation of Old components in the model**: Once the export is done, it will duplicate components with the name of old components; we can ignore it. Don't save the Fusion 360 model with old components. After conversion from Fusion to URDF, you can close the model without saving. It will be better to have a backup copy of the same model.
+
+2) **Generated URDF model may need fine tuning**: The generated URDF model may need fine-tuning for simulation, especially if you want to change the parameters like friction, material, etc. For example, if you want to export a mobile robot, the friction of the caster wheel may need to be tuned for smooth motion.
+
+3) **Generated package doesn't have Gazebo plugins and ROS 2 controllers**: The generated package has URDF, Gazebo parameters, and a launch file to visualize the robot in Rviz and spawn the model in Gazebo. It doesn't have any plugins to control the robot. It also has no sensors. You must edit the package to add all these into the robot model. 
+
 
 ## License
 
@@ -240,7 +250,7 @@ This project is licensed under the terms of the [MIT License](LICENSE).
 
 
 ## Credits
-* This project is an updation of repositories from <a href="https://github.com/syuntoku14/fusion2urdf" target="_blank">syuntoku14</a> and <a href="https://github.com/dheena2k2/fusion2urdf-ros2" target="_blank">dheena2k2</a>
+* This project is a modification of repositories from <a href="https://github.com/syuntoku14/fusion2urdf" target="_blank">syuntoku14</a> and <a href="https://github.com/dheena2k2/fusion2urdf-ros2" target="_blank">dheena2k2</a>
 
 * Code and Document updatation using <a href="https://github.com/features/copilot" target="_blank">Github Copilot</a> and <a href="https://chatgpt.com/" target="_blank">ChatGPT</a>
 
