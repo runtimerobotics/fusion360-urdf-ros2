@@ -70,7 +70,50 @@ After giving the height, select Operation option from Extrude window on right si
 
 # 3) Adding Wheels to the Robot base
 
+After making the main chassis of the robot, we can now add wheels to the chassis.
+We have to add two active wheels and two passive caster wheels to the chassis.
+
+The following image shows Z-X plane, which shows the side of the chassis in which we 
+have to add wheels.
+
+<p align="center">
+  <img src="img/modeling/wheel_1.png" alt="wheels" width="100%">
+</p>
+
+Now, to create wheels, we can start a sketch and extrude it like we did it for the chassis.
+In the following image, we can see have chose Sketch option, and chose circle with 
+center diameter circle and then choose the center of chassis like the following image.
+Give diameter as 100 mm and finish the sketch.
+
+<p align="center">
+  <img src="img/modeling/wheel_2.png" alt="wheels" width="100%">
+</p>
+
+Now, you can click on the wheel sketch. You may have to press Shift key to
+select each segment of the wheel.
+
+Now, press 'Q' to extrude it and make the distance 25mm as thickness of the wheel.
+Important think to note is, we have to make the wheel as a new body in the operation option in extrude.
+This make a new wheel as a new body.
+
+
+<p align="center">
+  <img src="img/modeling/wheel_3.png" alt="wheels" width="100%">
+</p>
+
+We can create the next wheel with the same process we have done with the first wheel.
+
+
 # 4) Moving Robot to Ground Level
+
+After creating 2 wheels and the chasis, totally, we have 3 bodies. 
+The next step is to move the entire robot above the design plane. You can compute the distance by measuring it and you can
+move the robot using Move button. Make sure you have selected all the 3 bodies before you move. You can roughly put 25 mm as Z value in Move window to lift the robot up from the design floor.
+
+You can find the robot position like the following image.
+<p align="center">
+  <img src="img/modeling/wheel_4.png" alt="wheels" width="100%">
+</p>
 
 # 5) Adding Lidar base and lidar to Robot
 
