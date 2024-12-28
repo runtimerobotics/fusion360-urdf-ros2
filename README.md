@@ -232,6 +232,11 @@ Here is the screenshot of these parameter of ros2bot from the demos.
   <img src="img/gazebo_param.png" alt="Gazebo Parameters">
 </p>
 
+
+### Editing the ROS 2 package for plugins
+
+### Moving the robot in Gazebo Sim and ROS 2
+
 ## Contributing
 
 Always welcome bug fixes, new features etc.

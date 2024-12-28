@@ -252,10 +252,6 @@ After setting one joint, you can do the same for next wheel as well.
 
 For lidar link, we have to create a rigid link between lidar and base_link.
 
-Congratulation, you have done with the modeling part of the robot. Now we can export the model.
+Congratulation, you have done with the modeling part of the robot. Now we can export the model to URDF.
 
-# 10) Exporting to URDF
 
-# 11) Editing the ROS 2 package for plugins
-
-# 12) Moving the robot in Gazebo Sim and ROS 2
