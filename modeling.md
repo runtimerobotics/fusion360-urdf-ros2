@@ -115,12 +115,88 @@ You can find the robot position like the following image.
   <img src="img/modeling/wheel_4.png" alt="wheels" width="100%">
 </p>
 
-# 5) Adding Lidar base and lidar to Robot
+Here is the side of the lifted robot.
 
-# 6) Adding Caster Wheels to the Base of the robot
+<p align="center">
+  <img src="img/modeling/lift_robot.png" alt="lift_robot" width="100%">
+</p>
 
-# 8) Adding material type and color
+# 5) Adding Caster Wheels to the Base of the robot
 
-# 9) Assigning Joints to Wheels
+After lifting the robot, the next step is to add caster wheels to the robot.
+We have to add caster wheel on the front and back of the robot.
+As we already discussed, casters are passive wheels which help the robot 
+to balance the robot model and also helps for weight distribution.
 
-# 10) Exporting to URDF
+In order to add two casters, we need to create 2 small cylinder on the bottom side of the 
+chassis. In order create a cylinder, we can use circle sketch and extrude it.
+The length of the extrude can be 24 mm, few mm less than than the robot height from the ground.
+
+
+<p align="center">
+  <img src="img/modeling/caster_sketch.png" alt="caster_sketch" width="100%">
+</p>
+
+Here is how we extrude the caster wheel. Make sure the operation is joint not new body. The caster is a part of the chassis.
+<p align="center">
+  <img src="img/modeling/caster_cylinder.png" alt="caster_sketch" width="100%">
+</p>
+
+After creating the cylinder on both side, we can make the bottom face of the cylinder as spherical.
+
+Select the face of cylinder, and Press 'F' or (Menu Surface->Modify->Fillet) and using mouse, we can create a spherical face from the flat surface.
+
+<p align="center">
+  <img src="img/modeling/spherical.png" alt="spherical" width="100%">
+</p>
+
+We can do the same operation for both the caster wheels, and the final output will look like the following image. 
+
+<p align="center">
+  <img src="img/modeling/caster_full.png" alt="spherical" width="100%">
+</p>
+
+# 6) Adding Lidar base and lidar to Robot
+
+Once the caster design are completed, next we can add a lidar to the front of the robot. We have to build a fixed platform first.
+After putting the base, we can create a cylinder shape on the top of it to replicate a lidar as show below.
+
+You can draw the box with 70 mm(length) x 60 mm(width) x 45 mm (height).
+
+<p align="center">
+  <img src="img/modeling/lidar_box.png" alt="lidar_box" width="100%">
+</p>
+
+After creating the box, we can do a a circle on the top of the box and create a cylinder by extruding the circle.
+Make sure, you are creating a new body when you extrude the object.
+
+After creating all bodies, you can rename these bodies into meaniful name like below
+
+<p align="center">
+  <img src="img/modeling/full_model.png" alt="lidar_box" width="100%">
+</p>
+
+The chassis has to name as base_link which is mandatory, and you can name 
+left and right wheel as same name and you can add name to lidar as well.
+
+# 7) Adding material type and color
+
+After creating the model, we may can goto each body and right click on each body and choose Physical materials.
+
+The Physical material can assign each link with a material properties.
+
+<p align="center">
+  <img src="img/modeling/body_materials.png" alt="lidar_box" width="100%">
+</p>
+
+Search for ABS plastic for the base link. Just click and drag the material to the link to apply the material.
+Choose Rubber black for wheels.
+
+<p align="center">
+  <img src="img/modeling/rubber_material.png" alt="lidar_box" width="100%">
+</p>
+
+
+# 8) Assigning Joints to Wheels and Joints
+
+# 9) Exporting to URDF
