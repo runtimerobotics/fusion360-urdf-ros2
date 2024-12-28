@@ -173,7 +173,7 @@ Make sure, you are creating a new body when you extrude the object.
 After creating all bodies, you can rename these bodies into meaniful name like below
 
 <p align="center">
-  <img src="img/modeling/full_model.png" alt="lidar_box" width="100%">
+  <img src="img/modeling/full_model.png" alt="full_model" width="100%">
 </p>
 
 The chassis has to name as base_link which is mandatory, and you can name 
@@ -186,17 +186,76 @@ After creating the model, we may can goto each body and right click on each body
 The Physical material can assign each link with a material properties.
 
 <p align="center">
-  <img src="img/modeling/body_materials.png" alt="lidar_box" width="100%">
+  <img src="img/modeling/body_materials.png" alt="body_materials" width="100%">
 </p>
 
 Search for ABS plastic for the base link. Just click and drag the material to the link to apply the material.
-Choose Rubber black for wheels.
+Choose Rubber black for wheels and laminate blue for lidar.
 
 <p align="center">
-  <img src="img/modeling/rubber_material.png" alt="lidar_box" width="100%">
+  <img src="img/modeling/rubber_material.png" alt="rubber_materials" width="100%">
 </p>
 
 
-# 8) Assigning Joints to Wheels and Joints
+# 8) Converting bodies to Components
 
-# 9) Exporting to URDF
+After adding the materials properties, we have to convert the individual bodies to Components.
+The convertion to bodies to Components is easy to do. 
+
+Here is how we can do it. 
+
+Click on to the Bodies option and choose the option called Components to Bodies
+as shown below. Bodies are single shape within a component. A component can hold multiple bodies.
+In order to export to URDF, we need to make individual component of the robot.
+
+<p align="center">
+  <img src="img/modeling/components.png" alt="components" width="100%">
+</p>
+
+# 9) Assigning Joints to Wheels and Joints
+
+After assigning the materials, we need to assign the joints for connecting 
+wheels to base_link. We also has to attach the lidar link to the base_link. This is the most 
+important step in the modeling. Without assigning joints, the robot can't able to move.
+
+Here are the steps to assign a joint in Fusion 360. We can first check how to create joint between wheels and base_link.
+
+First, we have to hide the base_link component, and press 'J' (Menu Solid->Assemble->Joint) to create a new joint.
+After invoking the joint option, we have to provide the components (link) which is in the joint.
+
+We can see how to create a revolute joint between the base_link the two wheels. 
+In order to create a joint, we need to 2 components, the first components should be the wheel and the second will be the base_link.
+
+We have to hide the base_link first, and click on the center of the wheel which is attached to the base_link.
+
+
+<p align="center">
+  <img src="img/modeling/joint_1.png" alt="joint" width="100%">
+</p>
+
+
+After click on the center on the wheel, we can see a coordinate on the wheel, next, we can hide the wheels and attach the frame in the base_link.
+
+<p align="center">
+  <img src="img/modeling/joint_2.png" alt="joint" width="100%">
+</p>
+
+Once it is done, you can press Motion Tab in Edit Joint option to select the type of joint.
+
+<p align="center">
+  <img src="img/modeling/joint_3.png" alt="joint" width="100%">
+</p>
+
+The revolute joint is what we need for the wheels, so select it and you can preview the motion of the joint as well.
+
+After setting one joint, you can do the same for next wheel as well.
+
+For lidar link, we have to create a rigid link between lidar and base_link.
+
+Congratulation, you have done with the modeling part of the robot. Now we can export the model.
+
+# 10) Exporting to URDF
+
+# 11) Editing the ROS 2 package for plugins
+
+# 12) Moving the robot in Gazebo Sim and ROS 2
