@@ -175,7 +175,8 @@ We can do the same operation for both the caster wheels and the final output wil
 Once the caster design is completed, we can add a lidar to the front of the robot. We have to build a fixed platform first.
 After putting the base, we can create a cylinder shape to replicate a lidar, as shown below.
 
-You can draw the box with 70 mm(length) x 60 mm(width) x 45 mm (height).
+You can draw a centered rectangle sketch with 70 mm(length) x 60 mm(width) and an extrude height of 45 mm (height). 
+You can put the center of the box 50 mm from the front of the robot.
 
 <p align="center">
   <img src="img/modeling/lidar_box.png" alt="lidar_box" width="100%">
