@@ -182,7 +182,7 @@ You can put the center of the box 50 mm from the front of the robot.
   <img src="img/modeling/lidar_box.png" alt="lidar_box" width="100%">
 </p>
 
-After creating the box, we can make a circle on the top and create a cylinder by extruding the circle.
+After creating the box, we can make a circle (29.5 mm radius) on the top and create a cylinder by extruding the circle by 20 mm.
 Make sure you are creating a new body when you extrude the object.
 
 After creating all bodies, you can rename them into meaningful names like the one below.
@@ -268,6 +268,13 @@ After setting one joint, you can do the same for the next wheel as well.
 
 For the lidar link, we have to create a rigid link between the lidar and base_link.
 
+In the Browser section of Fusion 360, go to *Joints* and rename each joint as right_wheel_joint and left_wheel_joint. 
+
 Congratulations, you have done with the modeling part of the robot. Now, we can export the model to URDF.
 
-We can continoue with the export instruction in the main [README](README.md)
+<p align="center">
+  <img src="img/modeling/final_model.png" alt="final" width="100%">
+</p>
+
+
+We can continue with the export instruction in the main [README](README.md)
