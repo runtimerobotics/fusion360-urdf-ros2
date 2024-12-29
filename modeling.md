@@ -141,6 +141,7 @@ We have to add a caster wheel on the front and back of the robot.
 As we already discussed, casters are passive wheels that help the robot balance and distribute weight.
 
 To add two casters, we must create 2 small cylinders on the **bottom** side of the chassis. 
+You can put the center of the circle *25 mm* from both sides and have a diameter of *24 mm*.
 
 To create a cylinder, we can extrude a circle sketch.
 The length of the extrude can be *24 mm*, a few mm less than the robot's height from the ground.
