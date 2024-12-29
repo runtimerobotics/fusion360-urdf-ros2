@@ -1,29 +1,37 @@
 # Introduction to Fusion 360 modeling for ROS 2
 
-In this document, we can see how to model a 2 wheel drive robot in Fusion 360 in-order to export into ROS 2 URDF.
+In this document, we can see how to model a 2-wheel drive robot in Fusion 360 in order to export into ROS 2 URDF.
 
-Here is the robot model we are going to design
+Here is the robot model we are going to design.
 
 <p align="center">
   <img src="img/f3d_model.png" alt="Fusion Model">
 </p>
 
-Here the important steps in the modeling of this robot
+Here are the important steps in the modeling of this robot
 
 # 1) Setting the Design plane for export
 
-We must follow the right-hand rule for setting the plane before starting the modeling. If we follow this, the exported URDF model will face the + X-axis.
+We must follow the *right-hand rule* for setting the plane before starting the modeling. 
 
-Here is the design plane we have to set before start the design.
+If we follow this, the exported URDF model will face the *+X-axis*. 
+This is the axis we need when we visualize robots in ROS 2.
+
+Here is the design plan we have to set before starting the design.
+
 <p align="center">
   <img src="img/modeling/coordinate.png" alt="Coordinate" width="50%">
 </p>
 
 # 2) Sketching Robot Base
 
-After setting the plane, we can start sketching the base of the robot. After sketching the plane, we can extrude the plane to create the box.
+After setting the plane, we can start sketching the robot's base. After sketching the plane, we can extrude the plane to create the box.
 
-Select Menu, SOLID -> Create Sketch. After pressing this option, it will ask which plane we have to draw the sketch. It will show different planes and choosing the exact plane we want may be confusing at first time. We can use Shift+ Mouse Center button to orbit the 3D view to select the same plane we have seen in the first step.
+Select Menu, *SOLID -> Create Sketch*. After pressing this option, it will ask which plane we have to draw the sketch. 
+
+It will show different planes, and choosing the exact plane we want may be confusing. 
+
+We can use the *Shift+ Mouse Center button* to orbit the 3D view to select the same plane we have seen in the first step.
 
 <p align="center">
   <img src="img/modeling/select_plane.png" alt="select_plane" width="100%">
@@ -32,69 +40,74 @@ Select Menu, SOLID -> Create Sketch. After pressing this option, it will ask whi
 
 After selecting the plane, orbit the 3D scene to make the +X axis always front. 
 
-Now, you can select the 2-point rectangle, and from sketch-palette window on right side, choose center rectange option as shown below. This option, can draw a rectangle from a center point. 
-
-After selecting, center point option, go to the origin of the plane and click the mouse and you can start drawing the rectangle.
+Now, you can select the *2-point rectangle* from the *SKETCH*. From *Sketch-palette* window on right side, choose *center rectange* option as shown below. 
+This option, can draw a rectangle from a center point. 
 
 <p align="center">
   <img src="img/modeling/draw_square.png" alt="draw_square" width="100%">
 </p>
 
-When you start drawing the square, you can find the dimension of the square, you can use Tab key to toggle the dimension. You can edit the dimensions in the box. For this model, you may can give 200 mm for each side.
+
+After selecting the plane, orbit the 3D scene to make the +X axis always front. 
+
+Now, you can select the *2-point rectangle* from the *SKETCH*. From the *Sketch-palette* window on the right side, choose the *center rectangle* option as shown below. 
+This option allows you to draw a rectangle from a center point.
+
 
 <p align="center">
   <img src="img/modeling/draw_square_1.png" alt="draw_square" width="100%">
 </p>
 
+Press the *Tab* key to switch between the square dimensions and enter the dimensions. 
+You can give **200 mm** as the width and length for the base_link.
 
 <p align="center">
   <img src="img/modeling/draw_square_2.png" alt="draw_square" width="100%">
 </p>
 
-After drawing giving the correct dimensions, you can the click the finish sketch button on the right side top to complete the sketch.
+After drawing the correct dimensions, you can click the *Finish sketch* button on the right side of the top to complete the sketch.
 
-After completing the sketch, you can click on the top of the sketch for selecting the top area of the sketch.
-
+After completing the sketch, you can click on the top to select the sketch's top area.
 
 <p align="center">
   <img src="img/modeling/draw_square_3.png" alt="draw_square" width="100%">
 </p>
 
-Now press the key 'Q' (Menu Solid ->Modify->Press Pull), to extrude the sketch surface to make a box. Once you press the 'Q' button you can see an arrow key to extrude the sketch to some height. You can give a values as 50 mm as the height.
+Now press the key * 'Q' (Menu Solid ->Modify->Press Pull)* to extrude the sketch surface to make a box. Once you press the *'Q'* button, you will see an arrow key that will extrude the sketch to some height. You can give a value of 50 mm as the height.
 
 <p align="center">
   <img src="img/modeling/draw_square_4.png" alt="draw_square" width="100%">
 </p>
 
-After giving the height, select Operation option from Extrude window on right side. The Operation option we have to select is New Body. After this option, we can press Ok.
+After giving the height as 50 mm, select the *Operation* option from the *Extrude window* on the right side. The *Operation* option we must select is **New Body**. After this option, we can press Ok.
 
 # 3) Adding Wheels to the Robot base
 
-After making the main chassis of the robot, we can now add wheels to the chassis.
-We have to add two active wheels and two passive caster wheels to the chassis.
+We can add wheels after making the robot's main chassis/base_link.
+We must add two active and two passive caster wheels to the chassis.
 
-The following image shows Z-X plane, which shows the side of the chassis in which we 
-have to add wheels.
+The following image shows the *Z-X plane*, which shows the side of the chassis in which we have to add wheels.
 
 <p align="center">
   <img src="img/modeling/wheel_1.png" alt="wheels" width="100%">
 </p>
 
-Now, to create wheels, we can start a sketch and extrude it like we did it for the chassis.
-In the following image, we can see have chose Sketch option, and chose circle with 
-center diameter circle and then choose the center of chassis like the following image.
-Give diameter as 100 mm and finish the sketch.
+To create wheels, we can start a sketch and extrude it like we did for the chassis.
+In the following image, we can see that you have chosen the *Sketch option* and chose a circle with 
+center diameter circle, and then choose the center of the chassis, as shown in the following image.
+Give a diameter of **100 mm** and press *Finish the sketch*.
 
 <p align="center">
   <img src="img/modeling/wheel_2.png" alt="wheels" width="100%">
 </p>
 
-Now, you can click on the wheel sketch. You may have to press Shift key to
+Now, you can click on the wheel sketch. You may have to press the *Shift* key to
 select each segment of the wheel.
 
-Now, press 'Q' to extrude it and make the distance 25mm as thickness of the wheel.
-Important think to note is, we have to make the wheel as a new body in the operation option in extrude.
-This make a new wheel as a new body.
+Now, press *'Q'* to extrude it and make the distance *25mm* the thickness of the wheel.
+
+The important thing to note is that we have to make the wheel a new body in the operation option in extrude.
+This makes a new wheel a new body.
 
 
 <p align="center">
@@ -103,19 +116,19 @@ This make a new wheel as a new body.
 
 We can create the next wheel with the same process we have done with the first wheel.
 
-
 # 4) Moving Robot to Ground Level
 
-After creating 2 wheels and the chasis, totally, we have 3 bodies. 
-The next step is to move the entire robot above the design plane. You can compute the distance by measuring it and you can
-move the robot using Move button. Make sure you have selected all the 3 bodies before you move. You can roughly put 25 mm as Z value in Move window to lift the robot up from the design floor.
+After creating 2 wheels and the base_link, we have 3 independent bodies. 
+The next step is to move the entire robot above the design plane. You can compute the distance by measuring it and 
+moving the robot using the *Move button*. Make sure you have selected all the 3 bodies before you move. You can roughly put *25 mm* as the *Z value* in the *Move window* to lift the robot from the design floor.
 
-You can find the robot position like the following image.
+You can find the robot's position in the following image.
+
 <p align="center">
   <img src="img/modeling/wheel_4.png" alt="wheels" width="100%">
 </p>
 
-Here is the side of the lifted robot.
+Here is the side view of the lifted robot.
 
 <p align="center">
   <img src="img/modeling/lift_robot.png" alt="lift_robot" width="100%">
@@ -124,27 +137,27 @@ Here is the side of the lifted robot.
 # 5) Adding Caster Wheels to the Base of the robot
 
 After lifting the robot, the next step is to add caster wheels to the robot.
-We have to add caster wheel on the front and back of the robot.
-As we already discussed, casters are passive wheels which help the robot 
-to balance the robot model and also helps for weight distribution.
+We have to add a caster wheel on the front and back of the robot.
+As we already discussed, casters are passive wheels that help the robot balance and distribute weight.
 
-In order to add two casters, we need to create 2 small cylinder on the bottom side of the 
-chassis. In order create a cylinder, we can use circle sketch and extrude it.
-The length of the extrude can be 24 mm, few mm less than than the robot height from the ground.
+To add two casters, we must create 2 small cylinders on the **bottom** side of the chassis. 
 
+To create a cylinder, we can extrude a circle sketch.
+The length of the extrude can be *24 mm*, a few mm less than the robot's height from the ground.
 
 <p align="center">
   <img src="img/modeling/caster_sketch.png" alt="caster_sketch" width="100%">
 </p>
 
-Here is how we extrude the caster wheel. Make sure the operation is joint not new body. The caster is a part of the chassis.
+Here is how we extrude the caster wheel. Make sure the Operation is a **Joint**, NOT a *New body*. The caster is a part of the chassis.
+
 <p align="center">
   <img src="img/modeling/caster_cylinder.png" alt="caster_sketch" width="100%">
 </p>
 
-After creating the cylinder on both side, we can make the bottom face of the cylinder as spherical.
+After creating the cylinder on both sides, we can make the bottom face of the cylinder, spherical.
 
-Select the face of cylinder, and Press 'F' or (Menu Surface->Modify->Fillet) and using mouse, we can create a spherical face from the flat surface.
+Select the face of the cylinder, and Press *'F'*  or *(Menu Surface->Modify->Fillet)*, and using a mouse, we can create a spherical face from the flat surface.
 
 <p align="center">
   <img src="img/modeling/spherical.png" alt="spherical" width="100%">
