@@ -276,12 +276,23 @@ def generate_launch_description():
         output='screen',
     )
 
+    # Bridge ROS topics and Gazebo messages for establishing communication
+    start_gazebo_ros_bridge_cmd = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        parameters=[{
+          'config_file': ros_gz_bridge_config,
+        }],
+        output='screen'
+      )      
+
 
     return LaunchDescription(
         [
             # Nodes and Launches
             gazebo,
             spawn,
+            start_gazebo_ros_bridge_cmd,
             robot_state_publisher,
         ]
     )
