@@ -268,7 +268,7 @@ After setting one joint, you can do the same for the next wheel as well.
 
 For the lidar link, we have to create a rigid link between the lidar and base_link.
 
-In the Browser section of Fusion 360, go to *Joints* and rename each joint as right_wheel_joint and left_wheel_joint. 
+In the Browser section of Fusion 360, go to *Joints* and rename each joint as right_wheel_joint, left_wheel_joint and lidar_joint. 
 
 Congratulations, you have done with the modeling part of the robot. Now, we can export the model to URDF.
 
