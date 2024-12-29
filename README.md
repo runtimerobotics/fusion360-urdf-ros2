@@ -10,6 +10,8 @@
   - [Converting Fusion 360 Model to URDF for ROS 2](#converting-fusion-360-model-to-urdf-for-ros-2)
   - [Visualizing Robot in Rviz](#visualizing-robot-in-rviz)
   - [Launching Robot Simulation in Gazebo Sim](#launching-robot-simulation-in-gazebo-sim)
+  - [Editing the ROS 2 package for plugins](#editing-the-ros-2-package-for-plugins)
+  - [Moving the robot in Gazebo Sim and ROS 2](#moving-the-robot-in-gazebo-sim-and-ros-2)
 - [Contributing](#contributing)
 - [Known Issues and Limitations](#known-issues-and-limitations)
 - [License](#license)
