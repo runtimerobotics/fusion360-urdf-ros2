@@ -1,34 +1,40 @@
 # Autodesk Fusion 360 to URDF for ROS 2
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Description](#description)
-  - [Features](#features)
-  - [System Requirements](#system-requirements)
-- [Installation](#installation)
-- [Important Design Practices](#important-design-practices)
-- [Usage](#usage)
-  - [Start Modeling a Sample Robot](#start-modeling-a-sample-robot)
-    - [1) Setting the Design plane for export](#1-setting-the-design-plane-for-export)
-    - [2) Sketching Robot Base](#2-sketching-robot-base)
-    - [3) Adding Wheels to the Robot base](#3-adding-wheels-to-the-robot-base)
-    - [4) Moving Robot to Ground Level](#4-moving-robot-to-ground-level)
-    - [5) Adding Caster Wheels to the Base of the robot](#5-adding-caster-wheels-to-the-base-of-the-robot)
-    - [6) Adding Lidar base and lidar to Robot](#6-adding-lidar-base-and-lidar-to-robot)
-    - [7) Adding material type and color](#7-adding-material-type-and-color)
-    - [8) Converting bodies to Components](#8-converting-bodies-to-components)
-    - [9) Assigning Joints to Wheels and Joints](#9-assigning-joints-to-wheels-and-joints)
-  - [Converting Fusion 360 Model to URDF for ROS 2](#converting-fusion-360-model-to-urdf-for-ros-2)
-  - [Building ROS 2 Package](#building-ros-2-package)
-  - [Visualizing Robot in Rviz](#visualizing-robot-in-rviz)
-  - [Launching Robot Simulation in Gazebo Sim](#launching-robot-simulation-in-gazebo-sim)
-  - [Editing the ROS 2 package for plugins](#editing-the-ros-2-package-for-plugins)
-  - [Moving the robot in Gazebo Sim and ROS 2](#moving-the-robot-in-gazebo-sim-and-ros-2)
-- [Contributing](#contributing)
-- [Known Issues and limitations](#known-issues-and-limitations)
-- [License](#license)
-- [Credits](#credits)
-- [Conclusion](#conclusion)
+
+1. [Introduction](#introduction)  
+2. [Description](#description)  
+   - [Features](#features)  
+   - [System Requirements](#system-requirements)  
+3. [Installation](#installation)  
+4. [Important Design Practices](#important-design-practices)  
+5. [Usage](#usage)  
+   - [Start Modeling a Sample Robot](#start-modeling-a-sample-robot)  
+     1. [Setting the Design Plane for Export](#1-setting-the-design-plane-for-export)  
+     2. [Sketching Robot Base](#2-sketching-robot-base)  
+     3. [Adding Wheels to the Robot Base](#3-adding-wheels-to-the-robot-base)  
+     4. [Moving Robot to Ground Level](#4-moving-robot-to-ground-level)  
+     5. [Adding Caster Wheels to the Base of the Robot](#5-adding-caster-wheels-to-the-base-of-the-robot)  
+     6. [Adding Lidar Base and Lidar to Robot](#6-adding-lidar-base-and-lidar-to-robot)  
+     7. [Adding Material Type and Color](#7-adding-material-type-and-color)  
+     8. [Converting Bodies to Components](#8-converting-bodies-to-components)  
+     9. [Assigning Joints to Wheels and Joints](#9-assigning-joints-to-wheels-and-joints)  
+   - [Converting Fusion 360 Model to URDF for ROS 2](#converting-fusion-360-model-to-urdf-for-ros-2)  
+   - [Building ROS 2 Package](#building-ros-2-package)  
+   - [Visualizing Robot in Rviz](#visualizing-robot-in-rviz)  
+   - [Launching Robot Simulation in Gazebo Sim](#launching-robot-simulation-in-gazebo-sim)  
+   - [Editing the ROS 2 Package for Plugins](#editing-the-ros-2-package-for-plugins)  
+     1. [Correction of Xacro File (if the Motion is Different)](#1-correction-of-xacro-file-if-the-motion-is-different)  
+     2. [Add Gazebo Sim Plugins / ROS 2 Controllers](#2-add-gazebo-sim-plugins--ros-2-controllers)  
+     3. [Update Gazebo-ROS 2 Bridge Topics](#3-update-gazebo-ros-2-bridge-topics)  
+     4. [Build and Run the Launch File](#4-build-and-run-the-launch-file)  
+     5. [Moving the Robot in Gazebo Sim and ROS 2](#5-moving-the-robot-in-gazebo-sim-and-ros-2)  
+6. [Contributing](#contributing)  
+7. [Known Issues and Limitations](#known-issues-and-limitations)  
+8. [License](#license)  
+9. [Credits](#credits)  
+10. [Conclusion](#conclusion)  
+
 
 ## Introduction
 The "Autodesk Fusion 360 to URDF for ROS 2" project aims to bridge the gap between CAD modeling and robotic simulation. 
@@ -704,7 +710,7 @@ After this, we can source the workspace and start the launch file
 ros2 launch rosbot_description gazebo.launch.py
 ```
 
-### Moving the robot in Gazebo Sim and ROS 2
+#### 5) Moving the robot in Gazebo Sim and ROS 2
 
 To move the robot in GUI, we have to install rqt plugin called rqt-robot-steering.
 
