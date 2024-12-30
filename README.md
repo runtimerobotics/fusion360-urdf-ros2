@@ -23,7 +23,7 @@
    - [Building ROS 2 Package](#building-ros-2-package)  
    - [Visualizing Robot in Rviz](#visualizing-robot-in-rviz)  
    - [Launching Robot Simulation in Gazebo Sim](#launching-robot-simulation-in-gazebo-sim)  
-   - [Editing the ROS 2 Package for Plugins](#editing-the-ros-2-package-for-plugins)  
+   - [Modifying the generated ROS 2 package](#modifying-the-generated-ros-2-package)  
      1. [Correction of Xacro File (if the Motion is Different)](#1-correction-of-xacro-file-if-the-motion-is-different)  
      2. [Add Gazebo Sim Plugins / ROS 2 Controllers](#2-add-gazebo-sim-plugins--ros-2-controllers)  
      3. [Update Gazebo-ROS 2 Bridge Topics](#3-update-gazebo-ros-2-bridge-topics)  
@@ -532,23 +532,25 @@ Here is the screenshot of these parameter of ros2bot from the demos.
 </p>
 
 
-### Editing the ROS 2 package for plugins
+### Modifying the generated ROS 2 package
 
-The package which is created by the plugin is incomplete. It can visualize and simulate the robot, but there are no Gazebo plugins or ROS 2 controller attached. These plugins are controllers help the robot to move and simulate various sensors. The plugin can't able to do that because each robot is unique right. 
+The package created by the plugin is incomplete. We can visualize and simulate the robot in Gazebo, but it will not move because no Gazebo plugins or ROS 2 controllers are attached. 
 
-We can take the generated package as a template in which we can modify it and add all the neccessary plugins.
+These plugins are programs that help the robot to move and simulate various sensors. We can't generate plugins for all robots because each robot is unique. 
 
-Here is an example ROS 2 package for rosbot.
+We can modify the generated package as a template and add all the necessary plugins.
 
-You can find the generated package of rosbot from [here](demos/rosbot/generated_pkg/rosbot_description/)
+Here is an example of the ROS 2 package for rosbot. You can find the generated package of rosbot from [here](demos/rosbot/generated_pkg/rosbot_description/)
 
-Here are the modification we have to do to make the robot live.
+Here are the modifications we have to do to make the robot live.
 
 #### 1) Correction of xacro file (if the motion is different)
 
-After visualizing and testing the joints of robot using *joint_state_publisher_gui*, you may notice some joints moving in opposite direction than we expected. 
+After visualizing and testing the joints of the robot using *joint_state_publisher_gui*, you may notice some joints moving in opposite directions than we expected. 
 
-In the case of rosbot, both wheel should rotate in clock-vice direction for the positive value of joint. If you are not getting it, we have to goto generated xacro file. For example, in this case, we can go to [rosbot.xacro](demos/rosbot/generated_pkg/rosbot_description/urdf/rosbot.xacro) and change the *right_wheel_joint* axis rotation of Y-axis. It is negative now, we have to remove the negative sign.
+In the case of rosbot, both wheels should rotate in a clock-vice direction for the positive value of the joint. If you are not getting it, we must edit the generated xacro file. 
+
+For example, in this case, we can go to [rosbot.xacro](demos/rosbot/generated_pkg/rosbot_description/urdf/rosbot.xacro) and change the *right_wheel_joint* axis rotation of Y-axis. It is negative now; we have to remove the negative sign.
 
 ```
 <joint name="right_wheel_joint" type="continuous">
@@ -571,18 +573,18 @@ It should be like this.
 
 You can find the final xacro from [here](demos/rosbot/modified_pkg/rosbot_description/urdf/rosbot.xacro)
 
-**Note**: The change in URDF can be different for each robots. This change is typical for this robot. After changing the axis, make sure everything works good.
+**Note**: The change in URDF can be different for each robot. This change is typical for this robot. After changing the axis, make sure everything works well.
 
 
 #### 2) Add Gazebo Sim Plugins / ROS 2 controllers
 
-After making the changes in xacro, add the neccessary Gazebo plugins and ROS 2 controllers in the URDF.
+After making the changes in xacro, add the necessary Gazebo plugins and ROS 2 controllers in the URDF.
 
-If you are planning to add Gazebo Sim/Gazebo Classic plugins, you can add it in the *rosbot.gazebo* file. In the rosbot example, you can find the final *rosbot.gazebo* from this [link](demos/rosbot/modified_pkg/rosbot_description/urdf/rosbot.gazebo). We have added *differential drive plugin*, *lidar*, *joint state plugin* in the URDF.
+If you plan to add Gazebo Sim/Gazebo Classic plugins, you can add them in the *rosbot.gazebo* file. In the rosbot example, you can find the final *rosbot.gazebo* from this [link](demos/rosbot/modified_pkg/rosbot_description/urdf/rosbot.gazebo). We have added *the differential drive plugin*, *lidar*, *and joint state plugin* in the URDF.
 
-Here are the extra addon you typically need for a differential drive robot with a lidar for Gazebo Sim (Prev Ignition Gazebo).
+Here are the add-ons for a differential drive robot with lidar for Gazebo Sim (Prev Ignition Gazebo).
+
 ```
-
   <gazebo>  
 
         <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
@@ -649,14 +651,14 @@ Here are the extra addon you typically need for a differential drive robot with 
 If you are working on Gazebo Classic, you can find the similar
 plugins from this [link](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins)
 
-Note: If you want to interface ROS 2 control with Gazebo Sim, you can refer book *Mastering ROS 2* book [code repo](https://github.com/PacktPublishing/Mastering-ROS-2/tree/main/Chapter05).
+Note: If you want to interface ROS 2 control with Gazebo Sim, you can refer to *Mastering ROS 2* book [code repo](https://github.com/PacktPublishing/Mastering-ROS-2/tree/main/Chapter05).
 
 
 #### 3) Update Gazebo-ROS 2 bridge topics
 
 After updating the plugins, if you run the gazebo simulation, you can find the Gazebo topics are showing not the ROS 2 topics.
 
-You can find the Gazebo topics using following command
+You can find the Gazebo topics using the following command.
 
 ```
 gz topic -l
@@ -666,7 +668,7 @@ To bridge the Gazebo topics to ROS 2, we can add the bridge topics in the *confi
 
 Here is the final [bridge yaml file](demos/rosbot/modified_pkg/rosbot_description/config/ros_gz_bridge_gazebo.yaml) for this example.
 
-Here are the addons in the generated config file
+Here are the add-ons in the generated config file
 
 ```
 - ros_topic_name: "/scan"
@@ -699,8 +701,7 @@ After doing this modification, we can able to see lidar data in Rviz and we can 
 
 #### 4) Build and Run the launch file
 
-After the package modification, we can do the building of ROS 2 workspace to reflect the changes
-
+After the package modification, we can use the building of the ROS 2 workspace to reflect the changes
 ```
 colcon build
 ```
@@ -712,14 +713,14 @@ ros2 launch rosbot_description gazebo.launch.py
 
 #### 5) Moving the robot in Gazebo Sim and ROS 2
 
-To move the robot in GUI, we have to install rqt plugin called rqt-robot-steering.
+To move the robot in GUI, we have to install the rqt plugin called rqt-robot-steering.
 
-Here is the instruction to install the plugin
+Here are the instructions to install the plugin
 
 ```
 sudo apt install ros-${ROS_DISTRO}-rqt-robot-steering
 ```
-After installing the plugin, we can start it using following command
+After installing the plugin, we can start it using the following command
 
 ```
 rqt --force-discover
