@@ -32,8 +32,9 @@
 6. [Contributing](#contributing)  
 7. [Known Issues and Limitations](#known-issues-and-limitations)  
 8. [License](#license)  
-9. [Credits](#credits)  
-10. [Conclusion](#conclusion)  
+9. [Roadmap](#roadmap)  
+10. [Credits](#credits)  
+11. [Conclusion](#conclusion)  
 
 
 ## Introduction
@@ -737,8 +738,6 @@ Open *Rviz* in another terminal and choose gazebo.rviz for visualizing the robot
 
 
 
-
-
 ## Contributing
 
 Always welcome bug fixes, new features etc.
@@ -758,6 +757,14 @@ Here is the list of known Issues in this project
 ## License
 
 This project is licensed under the terms of the [MIT License](LICENSE).
+
+
+## Roadmap
+
+Here are some of the features we plan to implement next (in the order of priority); if you are interested in contributing to any of those, please let us know!:
+
+- [ ] **More Example**: Has to add more robot models and demo packages with plugins and ROS 2 control.
+- [ ] **Optimizing for ROS 2**: The code needs improvement for ROS 2, especially for simulation.
 
 
 ## Credits
