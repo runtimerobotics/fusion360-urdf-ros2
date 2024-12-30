@@ -3,17 +3,29 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Description](#description)
+  - [Features](#features)
+  - [System Requirements](#system-requirements)
 - [Installation](#installation)
 - [Important Design Practices](#important-design-practices)
 - [Usage](#usage)
   - [Start Modeling a Sample Robot](#start-modeling-a-sample-robot)
+    - [1) Setting the Design plane for export](#1-setting-the-design-plane-for-export)
+    - [2) Sketching Robot Base](#2-sketching-robot-base)
+    - [3) Adding Wheels to the Robot base](#3-adding-wheels-to-the-robot-base)
+    - [4) Moving Robot to Ground Level](#4-moving-robot-to-ground-level)
+    - [5) Adding Caster Wheels to the Base of the robot](#5-adding-caster-wheels-to-the-base-of-the-robot)
+    - [6) Adding Lidar base and lidar to Robot](#6-adding-lidar-base-and-lidar-to-robot)
+    - [7) Adding material type and color](#7-adding-material-type-and-color)
+    - [8) Converting bodies to Components](#8-converting-bodies-to-components)
+    - [9) Assigning Joints to Wheels and Joints](#9-assigning-joints-to-wheels-and-joints)
   - [Converting Fusion 360 Model to URDF for ROS 2](#converting-fusion-360-model-to-urdf-for-ros-2)
+  - [Building ROS 2 Package](#building-ros-2-package)
   - [Visualizing Robot in Rviz](#visualizing-robot-in-rviz)
   - [Launching Robot Simulation in Gazebo Sim](#launching-robot-simulation-in-gazebo-sim)
   - [Editing the ROS 2 package for plugins](#editing-the-ros-2-package-for-plugins)
   - [Moving the robot in Gazebo Sim and ROS 2](#moving-the-robot-in-gazebo-sim-and-ros-2)
 - [Contributing](#contributing)
-- [Known Issues and Limitations](#known-issues-and-limitations)
+- [Known Issues and limitations](#known-issues-and-limitations)
 - [License](#license)
 - [Credits](#credits)
 - [Conclusion](#conclusion)
@@ -547,6 +559,3 @@ This project is licensed under the terms of the [MIT License](LICENSE).
 ## Conclusion
 
 In conclusion, the "Autodesk Fusion 360 to URDF for ROS 2" project provides a powerful and user-friendly tool for roboticists and engineers. By streamlining the process of converting CAD models to URDF files, this tool enhances the efficiency of robot design, visualization, and simulation within the ROS 2 ecosystem. We hope this project will significantly contribute to your robotic development efforts and look forward to your feedback and contributions.
-
-
-
