@@ -31,10 +31,11 @@
      5. [Moving the Robot in Gazebo Sim and ROS 2](#5-moving-the-robot-in-gazebo-sim-and-ros-2)  
 6. [Contributing](#contributing)  
 7. [Known Issues and Limitations](#known-issues-and-limitations)  
-8. [License](#license)  
-9. [Roadmap](#roadmap)  
-10. [Credits](#credits)  
-11. [Conclusion](#conclusion)  
+8. [Video Tutorials](#video-tutorials)
+9. [License](#license)  
+10. [Roadmap](#roadmap)  
+11. [Credits](#credits)  
+12. [Conclusion](#conclusion)  
 
 
 ## Introduction
@@ -714,7 +715,7 @@ ros2 launch rosbot_description gazebo.launch.py
 
 #### 5) Moving the robot in Gazebo Sim and ROS 2
 
-To move the robot in GUI, we have to install the rqt plugin called rqt-robot-steering.
+To move the robot in GUI, we have to install the rqt plugin called *rqt-robot-steering*.
 
 Here are the instructions to install the plugin
 
@@ -727,9 +728,9 @@ After installing the plugin, we can start it using the following command
 rqt --force-discover
 ```
 
-Then Choose the Plugins->Robot-Tools->Robot-Steering for moving the robot.
+Then Choose the *Plugins->Robot-Tools->Robot-Steering* for moving the robot.
 
-Open *Rviz* in another terminal and choose gazebo.rviz for visualizing the robot model and lidar data.
+Open *Rviz* in another terminal and choose *gazebo.rviz* for visualizing the robot model and lidar data.
 
 
 <p align="center">
@@ -753,6 +754,14 @@ Here is the list of known Issues in this project
 
 3) **Generated package doesn't have Gazebo plugins and ROS 2 controllers**: The generated package has URDF, Gazebo parameters, and a launch file to visualize the robot in Rviz and spawn the model in Gazebo. It doesn't have any plugins to control the robot. It also has no sensors. You must edit the package to add all these into the robot model. 
 
+
+## Video Tutorials
+
+Here are the list of the video tutorials available showing the conversion of Fusion to ROS 1 & ROS 2
+
+* Jerin Peter: 2 Wheeled robot [Video 1](https://youtu.be/cQh0gNfb6ro?si=YrpiM_YY4_1iVCjN), [Video 2](https://www.youtube.com/watch?v=FYF1L440tdY&ab_channel=JerinPeter), [Video 3](https://www.youtube.com/watch?v=z45n69NsPSc&t=2s&ab_channel=JerinPeter)
+* Pranshu Tople: 2 Wheeled robot [Video 1](https://www.youtube.com/watch?v=1zB7rc2DBjk&ab_channel=PranshuTople), [Video 2](https://www.youtube.com/live/o7w7yv-Nros?si=9cG6iYP7mhMna5rn)
+* Ammr: Mechanum Wheeled robot with Arm [Video 1](https://youtu.be/Pokyu91hb_o?si=Mp-0DAUngiiksJSt)
 
 ## License
 
