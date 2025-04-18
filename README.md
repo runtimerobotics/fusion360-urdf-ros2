@@ -140,7 +140,7 @@ In Fusion 360, the robot model and coordinate system looks like this
   - Components should contain **only bodies**—nested components are not supported.
   - Avoid components that have other components inside them.
 
-Here are the components and their bodies in the ros2bot from the demos
+Here are the components and their bodies in the rosbot from the demos
 
 <p align="center">
   <img src="img/components.png" alt="ROS2Bot Components">
@@ -485,8 +485,8 @@ After creating the ROS 2 package for your robot, you can copy the ROS 2 package 
 If you are working in Windows 11, you can work on ROS 2 using WSL or using a virtual machine. Othervice you can reboot and 
 select Ubuntu 22.04 for ROS 2 Humble/Ubuntu 24.04 for ROS 2 Jazzy.
 
-For example, if you use *ros2bot* model from demos folder and convert to ROS 2 package, you will get a package named
-*ros2bot_description*. The package is also put in the demos folder for your reference. Copy to your ROS 2 workspace
+For example, if you use *rosbot* model from demos folder and convert to ROS 2 package, you will get a package named
+*rosbot_description*. The package is also put in the demos folder for your reference. Copy to your ROS 2 workspace
 
 For eg. Let's ros2_ws is the name of the workspace and you copied the package to the *src* folder of the workspace.
 
@@ -504,7 +504,7 @@ After doing the sourcing of the workspace, we can do the visualization and simul
 Here is the command to visualize the robot in Rviz
 
 ```
-ros2 launch ros2bot_description display.launch.py
+ros2 launch rosbot_description display.launch.py
 ```
 This will be showing Rviz along with *joint_state_publisher_gui* node.
 
@@ -516,7 +516,7 @@ This will be showing Rviz along with *joint_state_publisher_gui* node.
 Here is the command to spawn the robot in Gazebo. The same command can be use for Gazebo Classic and Gazebo Sim.
 
 ```
-ros2 launch ros2bot_description gazebo.launch.py
+ros2 launch rosbot_description gazebo.launch.py
 ```
 **Note**: The URDF doesn't have any Gazebo plugin or ROS 2 controllers configurations. We have to edit the package to include all the 
 plugins of Gazebo.
@@ -527,7 +527,7 @@ plugins of Gazebo.
 
 **Note: If you are using Gazebo Sim you can visualize the center of mass, collision and inertia by finding the robot name in the **Entity Tree** and right click on it. You can find an option called **View** and can able to view all these parameters.**
 
-Here is the screenshot of these parameter of ros2bot from the demos.
+Here is the screenshot of these parameter of rosbot from the demos.
 
 <p align="center">
   <img src="img/gazebo_param.png" alt="Gazebo Parameters">
