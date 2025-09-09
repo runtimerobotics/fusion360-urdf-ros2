@@ -82,7 +82,7 @@ Here are the steps to install the script in Fusion 360
   <img src="img/scripts_ui.png" alt="Scripts and Add-Ins UI">
 </p>
 
-Click on the *Green +* icon and browse the extracted script folder as shown below. 
+Click on the *Green +* icon and choose Script or add-in from device. This will show a an open file dialog option to select the extracted script folder as shown below. 
 The folder we have to browse is *Fusion_URDF_Exporter_ROS2*. 
 
 <p align="center">
@@ -460,7 +460,7 @@ Congratulations, you have done with the modeling part of the robot. Now, we can 
 
 
 ### Converting Fusion 360 Model to URDF for ROS 2
-After completing the CAD model in Fusion 360, Press Shift+S for opening the script box and select the *Fusion_URDF_Exporter_ROS2* script from My Scripts. 
+After completing the CAD model in Fusion 360, Press Shift+S for opening the script box and select and run the *Fusion_URDF_Exporter_ROS2* script from the list. 
 
 <p align="center">
   <img src="img/fusion_360_steps.png" alt="Intro Screen">
