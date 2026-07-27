@@ -12,6 +12,7 @@ from xml.dom import minidom
 from shutil import copytree
 import fileinput
 import sys
+#import numpy as np
 
 def copy_occs(root):
     """
@@ -33,7 +34,7 @@ def copy_occs(root):
             occs.component.name = 'old_component'
             new_occs.component.name = 'base_link'
         else:
-            new_occs.component.name = re.sub('[ :()]', '_', occs.name)
+            new_occs.component.name = re.sub(' ','_',re.sub('[():]', '', occs.name.split(":")[0]))
         new_occs = allOccs.item((allOccs.count-1))
         for i in range(bodies.count):
             body = bodies.item(i)
@@ -83,7 +84,7 @@ def export_stl(design, save_dir, components):
                     stlExportOptions.sendToPrintUtility = False
                     stlExportOptions.isBinaryFormat = True
                     # options are .MeshRefinementLow .MeshRefinementMedium .MeshRefinementHigh
-                    stlExportOptions.meshRefinement = adsk.fusion.MeshRefinementSettings.MeshRefinementLow
+                    stlExportOptions.meshRefinement = adsk.fusion.MeshRefinementSettings.MeshRefinementHigh
                     exportMgr.execute(stlExportOptions)
                 except:
                     print('Component ' + occ.component.name + 'has something wrong.')
@@ -125,7 +126,28 @@ def origin2center_of_mass(inertia, center_of_mass, mass):
     z = center_of_mass[2]
     translation_matrix = [y**2+z**2, x**2+z**2, x**2+y**2,
                          -x*y, -y*z, -x*z]
-    return [ round(i - mass*t, 6) for i, t in zip(inertia, translation_matrix)]
+    return [ i - mass*t for i, t in zip(inertia, translation_matrix)]
+
+def get_urdf_inertia_via_principal(inertia, principal_axes):
+    """
+    Calcule la matrice d'inertie complète au Centre de Masse 
+    en utilisant les moments et axes principaux.
+    """
+
+    success_moment, i1, i2, i3 = inertia
+
+    success_axes, x_axis, y_axis, z_axis = principal_axes
+    
+    ixx = i1 * (x_axis.x**2) + i2 * (y_axis.x**2) + i3 * (z_axis.x**2)
+    iyy = i1 * (x_axis.y**2) + i2 * (y_axis.y**2) + i3 * (z_axis.y**2)
+    izz = i1 * (x_axis.z**2) + i2 * (y_axis.z**2) + i3 * (z_axis.z**2)
+    
+    # Produits d'inertie
+    ixy = i1 * (x_axis.x * x_axis.y) + i2 * (y_axis.x * y_axis.y) + i3 * (z_axis.x * z_axis.y)
+    ixz = i1 * (x_axis.x * x_axis.z) + i2 * (y_axis.x * y_axis.z) + i3 * (z_axis.x * z_axis.z)
+    iyz = i1 * (x_axis.y * x_axis.z) + i2 * (y_axis.y * y_axis.z) + i3 * (z_axis.y * z_axis.z)
+
+    return [ixx,iyy,izz,ixy,iyz,ixz]
 
 
 def prettify(elem):

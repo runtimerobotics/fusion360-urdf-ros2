@@ -9,6 +9,7 @@ import adsk, re
 from xml.etree.ElementTree import Element, SubElement
 from ..utils import utils
 
+
 class Link:
 
     def __init__(self, name, xyz, center_of_mass, repo, mass, inertia_tensor):
@@ -41,89 +42,93 @@ class Link:
         self.remain_repo_addr = repo[len(self.pkg_name):]
         self.mass = mass
         self.inertia_tensor = inertia_tensor
-        
+
     def make_link_xml(self):
         """
         Generate the link_xml and hold it by self.link_xml
         """
-        
+
         link = Element('link')
-        link.attrib = {'name':self.name}
-        
-        #inertial
+        link.attrib = {'name': self.name}
+
+        # inertial
         inertial = SubElement(link, 'inertial')
         origin_i = SubElement(inertial, 'origin')
-        origin_i.attrib = {'xyz':' '.join([str(_) for _ in self.center_of_mass]), 'rpy':'0 0 0'}       
+        origin_i.attrib = {'xyz': ' '.join([str(_) for _ in self.center_of_mass]), 'rpy': '0 0 0'}
         mass = SubElement(inertial, 'mass')
-        mass.attrib = {'value':str(self.mass)}
+        mass.attrib = {'value': str(self.mass)}
         inertia = SubElement(inertial, 'inertia')
         inertia.attrib = \
-            {'ixx':str(self.inertia_tensor[0]), 'iyy':str(self.inertia_tensor[1]),\
-            'izz':str(self.inertia_tensor[2]), 'ixy':str(self.inertia_tensor[3]),\
-            'iyz':str(self.inertia_tensor[4]), 'ixz':str(self.inertia_tensor[5])}        
-        
+            {'ixx': str(self.inertia_tensor[0]), 'iyy': str(self.inertia_tensor[1]), \
+             'izz': str(self.inertia_tensor[2]), 'ixy': str(self.inertia_tensor[3]), \
+             'iyz': str(self.inertia_tensor[4]), 'ixz': str(self.inertia_tensor[5])}
+
         # visual
         visual = SubElement(link, 'visual')
         origin_v = SubElement(visual, 'origin')
-        origin_v.attrib = {'xyz':' '.join([str(_) for _ in self.xyz]), 'rpy':'0 0 0'}
+        origin_v.attrib = {'xyz': ' '.join([str(_) for _ in self.xyz]), 'rpy': '0 0 0'}
         geometry_v = SubElement(visual, 'geometry')
         mesh_v = SubElement(geometry_v, 'mesh')
-        mesh_v.attrib = {'filename':'file://' + '$(find %s)' % self.pkg_name + self.remain_repo_addr + self.name + '.stl','scale':'0.001 0.001 0.001'}
+        mesh_v.attrib = {
+            'filename': '${mesh_prefix}' + '/' + self.name + '.stl',
+            'scale': '0.001 0.001 0.001'}
         material = SubElement(visual, 'material')
-        material.attrib = {'name':'silver'}
-        
+        material.attrib = {'name': 'silver'}
+
         # collision
         collision = SubElement(link, 'collision')
         origin_c = SubElement(collision, 'origin')
-        origin_c.attrib = {'xyz':' '.join([str(_) for _ in self.xyz]), 'rpy':'0 0 0'}
+        origin_c.attrib = {'xyz': ' '.join([str(_) for _ in self.xyz]), 'rpy': '0 0 0'}
         geometry_c = SubElement(collision, 'geometry')
         mesh_c = SubElement(geometry_c, 'mesh')
-        mesh_c.attrib = {'filename':'file://' + '$(find %s)' % self.pkg_name + self.remain_repo_addr + self.name + '.stl','scale':'0.001 0.001 0.001'}
+        mesh_c.attrib = {
+            'filename': '${mesh_prefix}' + '/' + self.name + '.stl',
+            'scale': '0.001 0.001 0.001'}
 
         # print("\n".join(utils.prettify(link).split("\n")[1:]))
         self.link_xml = "\n".join(utils.prettify(link).split("\n")[1:])
 
 
 def make_inertial_dict(root, msg):
-    """      
+    """
     Parameters
     ----------
     root: adsk.fusion.Design.cast(product)
         Root component
     msg: str
         Tell the status
-        
+
     Returns
     ----------
     inertial_dict: {name:{mass, inertia, center_of_mass}}
-    
+
     msg: str
         Tell the status
     """
-    # Get component properties.      
+    # Get component properties.
     allOccs = root.occurrences
     inertial_dict = {}
-    
+
     for occs in allOccs:
         # Skip the root component.
         occs_dict = {}
         prop = occs.getPhysicalProperties(adsk.fusion.CalculationAccuracy.VeryHighCalculationAccuracy)
-        
-        occs_dict['name'] = re.sub('[ :()]', '_', occs.name)
+        occs_name = re.sub(' ','_',re.sub('[():]', '', occs.name.split(":")[0]))
+        occs_dict['name'] = occs_name
 
         mass = prop.mass  # kg
         occs_dict['mass'] = mass
-        center_of_mass = [_/100.0 for _ in prop.centerOfMass.asArray()] ## cm to m
+        center_of_mass = [_ / 100.0 for _ in prop.centerOfMass.asArray()]  ## cm to m
         occs_dict['center_of_mass'] = center_of_mass
 
         # https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-ce341ee6-4490-11e5-b25b-f8b156d7cd97
         (_, xx, yy, zz, xy, yz, xz) = prop.getXYZMomentsOfInertia()
-        moment_inertia_world = [_ / 10000.0 for _ in [xx, yy, zz, xy, yz, xz] ] ## kg / cm^2 -> kg/m^2
+        moment_inertia_world = [_ / 10000.0 for _ in [xx, yy, zz, xy, yz, xz]]  ## kg / cm^2 -> kg/m^2
         occs_dict['inertia'] = utils.origin2center_of_mass(moment_inertia_world, center_of_mass, mass)
-        
+
         if occs.component.name == 'base_link':
             inertial_dict['base_link'] = occs_dict
         else:
-            inertial_dict[re.sub('[ :()]', '_', occs.name)] = occs_dict
+            inertial_dict[occs_name] = occs_dict
 
     return inertial_dict, msg

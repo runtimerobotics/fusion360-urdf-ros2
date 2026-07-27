@@ -1,11 +1,11 @@
-#Author-syuntoku14, Dheena2k2, Lentin Joseph,
+#Author-syuntoku14, Dheena2k2, Lentin Joseph, enezl
 #Description-Generate URDF file from Fusion 360
 
 import adsk, adsk.core, adsk.fusion, traceback
-import os
+import os, re
 import sys
 from .utils import utils
-from .core import Link, Joint, Write
+from .core import Link, Joint, Write, urdf_tree
 
 """
 # length unit is 'cm' and inertial unit is 'kg/cm^2'
@@ -18,6 +18,19 @@ from .core import Link, Joint, Write
 
 # I'm not sure how prismatic joint acts if there is no limit in fusion model
 
+
+def is_valid_robot_name(name):
+    return bool(re.fullmatch(r'[A-Za-z][A-Za-z0-9_-]*', name))
+
+
+def make_package_name(robot_name):
+    package_name = re.sub(r'[^a-z0-9_]+', '_', robot_name.lower())
+    package_name = re.sub(r'_+', '_', package_name).strip('_')
+    if not package_name or not package_name[0].isalpha():
+        package_name = 'robot_' + package_name
+    return package_name + '_description'
+
+
 def run(context):
     ui = None
     success_msg = 'Successfully created URDF file'
@@ -29,6 +42,7 @@ def run(context):
         app = adsk.core.Application.get()
         ui = app.userInterface
 
+
         product = app.activeProduct
         design = adsk.fusion.Design.cast(product)
         title = 'Fusion 360 -> ROS 2 URDF'
@@ -39,27 +53,50 @@ def run(context):
         root = design.rootComponent  # root component
         components = design.allComponents
 
-
-
-        # set the names
         robot_name = root.name.split()[0]
-        package_name = robot_name + '_description'
 
         # Show welcome message
         welcome_msg = ("Welcome to the Fusion 'Fusion 360 -> ROS 2 URDF Script' plugin.\n"
                        "\n"
                        "This tool generates a robot_description package with launch files for visualizing your robot in Rviz and spawning the model in Gazebo.\n"
                        "\n"
-                       "It has been tested with ROS 2 Jazzy and Gazebo Harmonic, as well as ROS 2 Humble with Gazebo Classic.\n\n"
+                       "It has been tested with ROS 2 Jazzy and Gazebo Harmonic, as well as ROS 2 Humble with Gazebo Classic.\n"
+                       "\n"
+                       "WARNING The current version only works with fusion in english.\n"
                        "\n"
                        "Press OK to continue or Cancel to quit.")
         if ui.messageBox(welcome_msg, title, adsk.core.MessageBoxButtonTypes.OKCancelButtonType) != adsk.core.DialogResults.DialogOK:
             return
+        name_choice_msg = ("Do you want to change the name of the robot ?\n"
+                           "\n"
+                           f"Current name : {robot_name}"
+                           "\n")
 
-        # Show folder browse message
-        browse_msg = "Press Ok to browse the folder for saving the ROS package, cancel to quit."
-        if ui.messageBox(browse_msg, title, adsk.core.MessageBoxButtonTypes.OKCancelButtonType) != adsk.core.DialogResults.DialogOK:
-            return
+        change_msg = "Choose a new robot name:\n"
+        error_msg = ""
+        if ui.messageBox(name_choice_msg, title, adsk.core.MessageBoxButtonTypes.YesNoButtonType) != adsk.core.DialogResults.DialogNo:
+            valid = False
+            while not valid:
+                temp_name, box_val = ui.inputBox(change_msg + error_msg, title)
+                if box_val != 0:
+                    ui.messageBox('Fusion 360 -> ROS 2 URDF was canceled', title)
+                    return
+                if is_valid_robot_name(temp_name):
+                    robot_name = temp_name
+                    valid = True
+                else:
+                    error_msg = (
+                        "\nUse a non-empty name starting with a letter and "
+                        "containing only letters, digits, underscores, or dashes.\n"
+                    )
+
+        # set the names
+
+        package_name = make_package_name(robot_name)
+        # # Show folder browse message
+        # browse_msg = "Press Ok to browse the folder for saving the ROS package, cancel to quit."
+        # if ui.messageBox(browse_msg, title, adsk.core.MessageBoxButtonTypes.OKCancelButtonType) != adsk.core.DialogResults.DialogOK:
+        #     return
 
         # Browse folder
         save_dir = utils.file_dialog(ui)
@@ -88,6 +125,7 @@ def run(context):
             if msg != success_msg:
                 ui.messageBox(msg, title)
                 return 0
+            joints_dict, tree_warnings = urdf_tree.make_urdf_tree(joints_dict)
 
             # Generate inertial_dict
             inertial_dict, msg = Link.make_inertial_dict(root, msg)
@@ -121,6 +159,8 @@ def run(context):
             utils.export_stl(design, save_dir, components)
 
             success_msg = 'Successfully created URDF file and launch file for Gazebo Harmonic'
+            if tree_warnings:
+                success_msg += '\n\nURDF tree warnings:\n' + '\n'.join(tree_warnings)
             ui.messageBox(success_msg, title)
 
         else:
@@ -132,12 +172,17 @@ def run(context):
 
             # Generate joints_dict. All joints are related to root.
             joints_dict, msg = Joint.make_joints_dict(root, msg)
+
+
             if msg != success_msg:
                 ui.messageBox(msg, title)
                 return 0
+            joints_dict, tree_warnings = urdf_tree.make_urdf_tree(joints_dict)
 
             # Generate inertial_dict
             inertial_dict, msg = Link.make_inertial_dict(root, msg)
+
+
             if msg != success_msg:
                 ui.messageBox(msg, title)
                 return 0
@@ -151,6 +196,7 @@ def run(context):
             # --------------------
             # Generate URDF
             Write.write_urdf(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir)
+
             Write.write_materials_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir)
             Write.write_transmissions_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir)
             Write.write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir)
@@ -164,9 +210,11 @@ def run(context):
             utils.update_package_xml(save_dir, package_name)
 
             # Generate STl files
-            utils.copy_occs(root)  
+            utils.copy_occs(root)
             utils.export_stl(design, save_dir, components)
             success_msg = 'Successfully created URDF file and launch file for Gazebo Classic'
+            if tree_warnings:
+                success_msg += '\n\nURDF tree warnings:\n' + '\n'.join(tree_warnings)
             ui.messageBox(success_msg, title)
 
 
@@ -174,4 +222,3 @@ def run(context):
     except Exception as e:
         if ui:
             ui.messageBox(f'Failed:\n{str(e)}', title)
-

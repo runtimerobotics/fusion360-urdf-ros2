@@ -3,6 +3,7 @@
 Created on Sun May 12 20:17:17 2019
 
 @author: syuntoku
+edit: enezl
 """
 
 import adsk, re
@@ -31,7 +32,7 @@ class Joint:
         tran_xml: str
             generated xml describing about the transmission
         """
-        self.name = name
+        self.name = name.replace(" ", "_")
         self.type = joint_type
         self.xyz = xyz
         self.parent = parent
@@ -100,7 +101,7 @@ class Joint:
 
 def make_joints_dict(root, msg):
     """
-    joints_dict holds parent, axis and xyz informatino of the joints
+    joints_dict holds parent, axis and xyz information of the joints
     
     
     Parameters
@@ -123,7 +124,7 @@ def make_joints_dict(root, msg):
     'PinSlot', 'Planner', 'Ball']  # these are the names in urdf
 
     joints_dict = {}
-    
+
     for joint in root.joints:
         joint_dict = {}
         joint_type = joint_type_list[joint.jointMotion.jointType]
@@ -151,7 +152,7 @@ def make_joints_dict(root, msg):
                 break
             else:  # if there is no angle limit
                 joint_dict['type'] = 'continuous'
-                
+
         elif joint_type == 'prismatic':
             joint_dict['axis'] = [round(i, 6) for i in \
                 joint.jointMotion.slideDirectionVector.asArray()]  # Also normalized
@@ -172,10 +173,10 @@ def make_joints_dict(root, msg):
         if joint.occurrenceTwo.component.name == 'base_link':
             joint_dict['parent'] = 'base_link'
         else:
-            joint_dict['parent'] = re.sub('[ :()]', '_', joint.occurrenceTwo.name)
-        joint_dict['child'] = re.sub('[ :()]', '_', joint.occurrenceOne.name)
-        
-        
+            joint_dict['parent'] = re.sub(' ','_',re.sub('[():]', '', joint.occurrenceTwo.name.split(":")[0]))
+        joint_dict['child'] = re.sub(' ','_',re.sub('[():]', '', joint.occurrenceOne.name.split(":")[0]))
+
+
         #There seem to be a problem with geometryOrOriginTwo. To calcualte the correct orogin of the generated stl files following approach was used.
         #https://forums.autodesk.com/t5/fusion-360-api-and-scripts/difference-of-geometryororiginone-and-geometryororiginonetwo/m-p/9837767
         #Thanks to Masaki Yamamoto!
